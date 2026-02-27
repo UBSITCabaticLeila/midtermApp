@@ -1,0 +1,13 @@
+<div class="container mt-4">
+    <div class="card bg-dark text-white p-4">
+      <h4 class="text-danger">Interpolation <span class="badge bg-secondary">{{ '{' }}{{ '{' }} {{ '}' }}{{ '}' }}</span></h4>
+      <hr class="text-danger">
+      <p>Name: <strong>{{ studentName }}</strong></p>
+      <p>Age: <strong>{{ age }}</strong></p>
+      <p>Course: <strong>{{ course }}</strong></p>
+      <p>Date Today: <strong>{{ today | date:'fullDate' }}</strong></p>
+      <p>Enrolled: <strong>{{ isEnrolled }}</strong></p>
+      <p>Math Expression: <strong>{{ age * 2 }}</strong></p>
+      <p>String Expression: <strong>{{ 'Hello, ' + studentName + '!' }}</strong></p>
+    </div>
+  </div>
