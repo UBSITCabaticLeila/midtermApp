@@ -1,0 +1,293 @@
+<!-- ============================================================ -->
+<!-- SECTION B: PROPERTY BINDING  [ ]                            -->
+<!-- Square brackets tell Angular: evaluate the right-hand side  -->
+<!-- as a TypeScript expression and assign its RESULT to the DOM -->
+<!-- property named inside the brackets.                         -->
+<!-- KEY DIFFERENCE FROM ATTR BINDING: you're setting JS props,  -->
+<!-- not HTML attributes. img.src is a JS property; src= is attr. -->
+<!-- ============================================================ -->
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Nunito:wght@400;600;700;800&display=swap');
+  
+    .pb-page { font-family: 'Nunito', 'Open Sans', sans-serif; padding: 2rem 0 3rem; }
+  
+    /* Hero */
+    .pb-hero {
+      background: linear-gradient(135deg, #1c2030 0%, #2d3250 100%);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .pb-hero::before {
+      content: '[ ]';
+      position: absolute;
+      right: 2rem; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Fira Code', monospace;
+      font-size: 6rem;
+      color: rgba(255,255,255,0.05);
+      pointer-events: none;
+      line-height: 1;
+    }
+    .pb-hero-badge {
+      display: inline-block;
+      background: rgba(217,35,15,0.25);
+      border: 1px solid rgba(217,35,15,0.5);
+      color: #f4a09a;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.75rem; border-radius: 50px; margin-bottom: 0.75rem;
+    }
+    .pb-hero h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; margin-bottom: 0.5rem; color: #fff;
+    }
+    .pb-hero h1 code {
+      font-family: 'Fira Code', monospace;
+      color: #f4a09a; font-size: 0.85em;
+      background: rgba(217,35,15,0.2);
+      padding: 0.1em 0.35em; border-radius: 6px;
+    }
+    .pb-hero p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 620px; margin: 0; line-height: 1.65; }
+  
+    /* Explanation box */
+    .pb-explain {
+      background: #fff; border: 1px solid #e8e8e8;
+      border-left: 4px solid #029acf;
+      border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+    }
+    .pb-explain p { margin: 0 0 0.5rem; color: #444; font-size: 0.95rem; line-height: 1.6; }
+    .pb-explain p:last-child { margin-bottom: 0; }
+    .pb-explain code {
+      background: #f0f4ff; color: #d9230f;
+      padding: 0.1em 0.4em; border-radius: 4px;
+      font-family: 'Fira Code', monospace; font-size: 0.875em;
+    }
+  
+    /* Section label */
+    .demo-section-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #d9230f; margin-bottom: 0.4rem;
+    }
+    .demo-section-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.35rem; font-weight: 800; color: #1c2030; margin-bottom: 1.25rem;
+    }
+  
+    /* Demo cards */
+    .demo-card {
+      background: #fff; border: 1px solid #e8e8e8;
+      border-radius: 12px; overflow: hidden; height: 100%;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .demo-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); transform: translateY(-2px); }
+    .demo-card-header {
+      background: #f8f9fa; border-bottom: 1px solid #eee;
+      padding: 0.75rem 1.25rem;
+      display: flex; align-items: center; gap: 0.65rem;
+    }
+    .demo-letter {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px;
+      background: #d9230f; color: #fff;
+      font-size: 0.7rem; font-weight: 800; border-radius: 6px; flex-shrink: 0;
+      font-family: 'Nunito', sans-serif;
+    }
+    .demo-card-title { margin: 0; font-size: 0.9rem; font-weight: 700; color: #1c2030; }
+    .demo-card-body { padding: 1.25rem; }
+  
+    .demo-desc { font-size: 0.875rem; color: #666; line-height: 1.55; margin-bottom: 0.9rem; }
+    .demo-desc code {
+      background: #f5f5f5; color: #d9230f;
+      padding: 0.1em 0.35em; border-radius: 4px;
+      font-family: 'Fira Code', monospace; font-size: 0.85em;
+    }
+  
+    /* Code snippet */
+    .code-snippet {
+      background: #1c2030; color: #a5d6ff;
+      font-family: 'Fira Code', monospace; font-size: 0.78rem;
+      padding: 0.65rem 1rem; border-radius: 8px; margin-bottom: 1rem;
+      overflow-x: auto; white-space: nowrap;
+    }
+    .hl-bracket { color: #f4a09a; }
+    .hl-attr    { color: #79c0ff; }
+    .hl-val     { color: #a5d6ff; }
+    .hl-tag     { color: #7ee787; }
+  
+    /* Live area */
+    .live-label {
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 0.4rem;
+    }
+    .live-area {
+      background: #fafafa; border: 1px dashed #ddd;
+      border-radius: 8px; padding: 1rem 1.1rem;
+      display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .live-area.col-dir { flex-direction: column; align-items: flex-start; }
+    .live-hint { font-size: 0.78rem; color: #888; font-style: italic; }
+    .live-hint code {
+      background: #f0f0f0; color: #555;
+      padding: 0.05em 0.3em; border-radius: 3px;
+      font-family: 'Fira Code', monospace; font-size: 0.85em;
+    }
+    .demo-img-thumb { border-radius: 6px; border: 1px solid #ddd; background: #f5f5f5; }
+    .demo-card-body .form-control { font-size: 0.9rem; }
+    .demo-card-body .form-label { font-size: 0.85rem; font-weight: 600; color: #444; margin-bottom: 0.4rem; }
+  </style>
+  
+  <div class="container pb-page">
+  
+    <!-- ======== HERO ======== -->
+    <div class="pb-hero">
+      <div class="pb-hero-badge">One-Way Binding</div>
+      <h1>Property Binding <code>[ ]</code></h1>
+      <p>
+        Square brackets tell Angular to evaluate the right-hand side as a TypeScript expression
+        and assign the result to the named DOM property — not an HTML attribute.
+      </p>
+    </div>
+  
+    <!-- ======== EXPLANATION ======== -->
+    <div class="pb-explain">
+      <p><strong>Syntax:</strong> <code>[property]="expression"</code></p>
+      <p>
+        <code>property</code> is the DOM property to bind to, and
+        <code>expression</code> is the TypeScript value to assign.
+      </p>
+      <p>
+        <strong>Key difference from attribute binding:</strong> you're setting JavaScript properties
+        (e.g. <code>img.src</code>), not HTML attributes (e.g. <code>src="..."</code>).
+        Property binding is used to set element state — like enabling/disabling a button
+        based on component logic.
+      </p>
+    </div>
+  
+    <!-- ======== DEMO CARDS ======== -->
+    <div class="demo-section-label">Live Examples</div>
+    <div class="demo-section-title">B — Property Binding Demos</div>
+  
+    <div class="row g-4">
+  
+      <!-- CARD A: Disabled -->
+      <div class="col-md-6">
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-letter">A</span>
+            <h6 class="demo-card-title">Disabled Property</h6>
+          </div>
+          <div class="demo-card-body">
+            <p class="demo-desc">
+              Binds to the <code>[disabled]</code> DOM property. Without brackets,
+              any non-empty string would always disable the button — because HTML
+              attribute strings are truthy.
+            </p>
+            <div class="code-snippet">
+              &lt;<span class="hl-tag">button</span>
+              <span class="hl-bracket">[</span><span class="hl-attr">disabled</span><span class="hl-bracket">]</span>=<span class="hl-val">"isButtonDisabled"</span>
+              (<span class="hl-attr">click</span>)=<span class="hl-val">"onButtonClick()"</span>&gt;
+            </div>
+            <p class="live-label">Live Output</p>
+            <div class="live-area">
+              <!-- Bind to the disabled DOM property -->
+              <button type="button" class="btn btn-primary"
+                [disabled]="isButtonDisabled"
+                (click)="onButtonClick()">
+                Click Me
+              </button>
+              <span class="live-hint">Disabled until first click via event binding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- CARD B: Image -->
+      <div class="col-md-6">
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-letter">B</span>
+            <h6 class="demo-card-title">Image src, alt &amp; width</h6>
+          </div>
+          <div class="demo-card-body">
+            <p class="demo-desc">
+              Binds to <code>[src]</code>, <code>[alt]</code>, and <code>[width]</code>
+              DOM properties of the <code>&lt;img&gt;</code> element using component data.
+            </p>
+            <div class="code-snippet">
+              &lt;<span class="hl-tag">img</span>
+              <span class="hl-bracket">[</span><span class="hl-attr">src</span><span class="hl-bracket">]</span>=<span class="hl-val">"imageSource"</span>
+              <span class="hl-bracket">[</span><span class="hl-attr">alt</span><span class="hl-bracket">]</span>=<span class="hl-val">"imageAlt"</span>
+              <span class="hl-bracket">[</span><span class="hl-attr">width</span><span class="hl-bracket">]</span>=<span class="hl-val">"imageWidth"</span> /&gt;
+            </div>
+            <p class="live-label">Live Output</p>
+            <div class="live-area">
+              <!-- Bind to img.src and img.alt DOM properties -->
+              <img [src]="imageSource" [alt]="imageAlt" [width]="imageWidth" class="demo-img-thumb" />
+              <span class="live-hint">Image loaded via <code>[src]</code> property binding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- CARD C: Anchor href -->
+      <div class="col-md-6">
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-letter">C</span>
+            <h6 class="demo-card-title">Anchor href Property</h6>
+          </div>
+          <div class="demo-card-body">
+            <p class="demo-desc">
+              Binds <code>[href]</code> to a dynamic URL from the component.
+              Interpolation <code>&#123;&#123; linkUrl &#125;&#125;</code> displays the URL as visible text.
+            </p>
+            <div class="code-snippet">
+              &lt;<span class="hl-tag">a</span>
+              <span class="hl-bracket">[</span><span class="hl-attr">href</span><span class="hl-bracket">]</span>=<span class="hl-val">"linkUrl"</span>&gt;&#123;&#123; linkUrl &#125;&#125;&lt;/<span class="hl-tag">a</span>&gt;
+            </div>
+            <p class="live-label">Live Output</p>
+            <div class="live-area col-dir">
+              <!-- Bind to href and textContent via property binding -->
+              <a [href]="linkUrl" target="_blank">{{ linkUrl }}</a>
+              <a [href]="linkUrl" class="btn btn-sm btn-outline-primary" [name]="linkUrl" target="_blank">
+                Visit UB Site
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- CARD D: Placeholder -->
+      <div class="col-md-6">
+        <div class="demo-card">
+          <div class="demo-card-header">
+            <span class="demo-letter">D</span>
+            <h6 class="demo-card-title">Input Placeholder</h6>
+          </div>
+          <div class="demo-card-body">
+            <p class="demo-desc">
+              Binds to the <code>[placeholder]</code> DOM property of an input element,
+              pulling the hint text dynamically from the component class.
+            </p>
+            <div class="code-snippet">
+              &lt;<span class="hl-tag">input</span>
+              <span class="hl-bracket">[</span><span class="hl-attr">placeholder</span><span class="hl-bracket">]</span>=<span class="hl-val">"inputPlaceholder"</span> /&gt;
+            </div>
+            <p class="live-label">Live Output</p>
+            <!-- Bind to the placeholder property of an input -->
+            <label class="form-label" for="inputDefault">Type your name here</label>
+            <input type="text" class="form-control" [placeholder]="inputPlaceholder" id="inputDefault">
+          </div>
+        </div>
+      </div>
+  
+    </div><!-- /row -->
+  
+  </div><!-- /container -->

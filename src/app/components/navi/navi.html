@@ -1,0 +1,21 @@
+<nav class="navbar">
+    <div class="container navbar-inner">
+      <a class="brand" routerLink="/">
+        <span class="brand-icon">◈</span>
+        {{ appTitle }}
+      </a>
+      <ul class="nav-links">
+        @for (link of navLinks; track link.path) {
+          <li>
+            <a [routerLink]="link.path" routerLinkActive="active">
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+      <div class="nav-meta">
+        <span class="badge">v{{ version }}</span>
+        <span class="date-text">{{ currentDate | date:'mediumDate' }}</span>
+      </div>
+    </div>
+  </nav>

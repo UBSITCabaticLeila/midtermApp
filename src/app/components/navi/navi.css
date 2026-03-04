@@ -1,0 +1,36 @@
+.navbar {
+    background: var(--surface);
+    border-bottom: 2px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.9rem 0;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .brand-icon { color: var(--accent); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; flex: 1; }
+  .nav-links a {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-meta { display: flex; align-items: center; gap: 0.75rem; }
+  .date-text { font-size: 0.8rem; color: var(--text-muted); }
