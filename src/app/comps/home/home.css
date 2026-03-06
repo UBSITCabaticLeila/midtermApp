@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Nunito:wght@400;600;700;800&display=swap');
 
 * { font-family: 'Nunito', sans-serif; box-sizing: border-box; }
@@ -153,3 +154,31 @@
   font-size: 0.875rem; color: #64748b;
   line-height: 1.55; margin: 0;
 }
+=======
+.home-wrapper { padding-bottom: 3rem; }
+.hero {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  padding: 4rem 0 3rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--surface-2);
+}
+.hero-sub {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.hero-title { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.15; margin-bottom: 1rem; }
+.hero-desc { color: var(--text-muted); max-width: 540px; margin-bottom: 1.75rem; font-size: 1.05rem; }
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 1.25rem;
+}
+.feature-card { text-align: center; transition: var(--transition); }
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(233,69,96,0.2); }
+.feature-icon { display: block; font-family: monospace; font-size: 1.4rem; color: var(--accent); margin-bottom: 0.6rem; }
+.feature-card h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+.feature-card p  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+>>>>>>> 7d46a3d7fabe598c4b68b2c92617eba5662f852f
