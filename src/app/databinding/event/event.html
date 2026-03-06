@@ -1,96 +1,191 @@
-<div class="mb-3">
-    <h1>Event Binding</h1>
-    <p>Event binding in Angular allows you to listen for and respond to user events such as clicks, input changes, and form submissions. It is a one-way binding from the view to the component.</p>
-    <p>Syntax: <code>(event)="handler"</code></p>
-    <p>In this syntax, <code>event</code> is the name of the DOM event you want to listen for (e.g., <code>click</code>, <code>input</code>, <code>submit</code>), and <code>handler</code> is the name of a method in your component that will be called when the event occurs.</p>
-    <p>Event binding is used to trigger component logic in response to user interactions. For example, you can bind to the <code>click</code> event of a button to execute a method that updates the component state or performs an action.</p>
-    
-    <h4 class="card-title">Examples</h4>
-        <pre><code>&lt;button (click)="onButtonClick()"&gt;Click Me&lt;/button&gt;</code></pre>
-        <p>In this example, the <code>click</code> event of the button is bound to the <code>onButtonClick()</code> method in the component. When the button is clicked, the method will be executed.</p>
-    <div class="card text-white bg-primary mb-3" >
-      <div class="card-header">Event Binding</div>
-      <div class="card-body">
-        <h4 class="card-title">Examples</h4>
-        <!--________________________________________________________-->
-        <h2>C — Event Binding <code>( )</code></h2>
-        <button type="button" class="btn btn-warning d-grid gap-2 col-3 " [disabled]="isButtonDisabled" (click)="onButtonClick()">{{buttonLabel}}</button><br>
-        <!-- (click) fires on mouse click or touch -->
-    
-        <p>(click) fires on mouse click or touch </p>
-        <button type="button" class="btn btn-info d-grid gap-2 col-3 mt-2"(click)="onButtonClick()">
-          Clicked {{ clickCount }} time(s)
-        </button>
-    
-        <!-- $event is the native KeyboardEvent; we pass it to the handler -->
-         <p>$event is the native KeyboardEvent; we pass it to the handler </p>
-        <input type="text"
-              style='width:20em'
-              class="form-control mt-2"
-              placeholder="Press any key..."
-               (keyup)="onKeyPress($event)" />
-        <p>Last key pressed: <code>{{ lastKeyPressed }}</code></p>
-    
-        <!-- Tracking mouse position with (mousemove) -->
-         <p>Tracking mouse position with (mousemove) </p>
-        <div class="mouse-tracker"
-             (mousemove)="onMouseMove($event)"
-             (mouseenter)="onMouseEnter()"
-             (mouseleave)="onMouseLeave()">
-          Move mouse here!
-          X: {{ mousePosition.x }} | Y: {{ mousePosition.y }}
+<div class="container ev-page">
+
+  <!-- HERO -->
+  <div class="ev-hero">
+    <div class="ev-hero-badge">One-Way Binding</div>
+    <h1>Event Binding <code>( )</code></h1>
+    <p>Listen and respond to user events such as clicks, input changes, and form submissions. Data flows <strong>from the view to the component</strong>.</p>
+  </div>
+
+  <!-- EXPLANATION -->
+  <div class="ev-explain">
+    <p><strong>Syntax:</strong> <code>(event)="handler()"</code></p>
+    <p><code>event</code> is the DOM event to listen for (e.g. <code>click</code>, <code>input</code>, <code>submit</code>), and <code>handler</code> is the component method called when it fires.</p>
+    <p>Event binding triggers component logic in response to user interactions — updating state, processing input, or performing actions.</p>
+  </div>
+
+  <!-- DEMO CARDS -->
+  <div class="demo-section-label">Live Examples</div>
+  <div class="demo-section-title">C — Event Binding Demos</div>
+
+  <div class="row g-4">
+
+    <!-- CARD A: Click Events -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">A</span>
+          <h6 class="demo-card-title">Click Event</h6>
         </div>
-    
-          <!-- ── Color picker — (change) event ───────────────────── -->
-      <label>Pick a color:
-        <input type="color" [value]="selectedColor" (change)="onColorChange($event)" />
-      </label>
-      <p>Selected Color: <span [style.color]="selectedColor">{{ selectedColor }}</span></p>
-        <!-- (input) fires on every keystroke in an input field -->
-        <input type="text"
-            style='width:20em'
-            class="form-control"
-            placeholder="Type here (input event)"
-               (input)="onInputChange($event)" />
-        <p>You typed: {{ typedInput }}</p>
-    
-        <!-- (change) fires when an input loses focus after its value has changed -->
-    
-    <select [(ngModel)]="selectedFramework" (change)="onSelectionChange(selectedFramework)" class="form-select form-select-lg mb-3" aria-label="Large select example">
-      <option value="" disabled>Select a framework</option>
-      @for (framework of frameworks; track framework.name) {
-        <option [value]="framework.name">{{ framework.value }}</option>
-      }
-    </select>
-    
-    <p>Selected Framework: {{ selectedFramework }}</p>
-    
-      <!-- ── Form submit event ───────────────────────────────── -->
-      <form (submit)="onFormSubmit($event)">
-        <input type="text" [value]="inputValue" (input)="inputValue = $any($event).target.value" class="form-control" style="width: 25%;"/>
-        <button type="submit" class="btn btn-success">Submit</button>
-      </form>
-      <p>{{ formMessage }}</p>
-     
-      <!-- ── Double-click event ─────────────────────────────── -->
-      <div (dblclick)="onDoubleClick()" class="dblclick-area">
-        Double-click me!
-      </div>
-     
-      <!-- ── Right-click (contextmenu) event ───────────────── -->
-      <div (contextmenu)="onRightClick($event)" class="rightclick-area">
-        Right-click me!
-      </div>
-    
-        <!-- ── Event log display ─────────────────────────────── -->
-      <div class="event-log">
-        <strong>Event Log (last 5):</strong>
-        @for(entry of eventLog; track entry) {
-          <p>{{ entry }}</p>
-        }
+        <div class="demo-card-body">
+          <p class="demo-desc">Binds <code>(click)</code> to a button. Fires on mouse click or touch.</p>
+          <div class="code-snippet">
+            &lt;<span class="hl-tag">button</span>
+            (<span class="hl-attr">click</span>)=<span class="hl-val">"onButtonClick()"</span>&gt;
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <button class="ev-btn" [disabled]="isButtonDisabled" (click)="onButtonClick()">
+                {{ buttonLabel }}
+              </button>
+              <button class="ev-btn-outline" (click)="onButtonClick()">
+                Clicked {{ clickCount }} time(s)
+              </button>
+            </div>
+            <span class="live-hint">First button enables after first click</span>
+          </div>
+        </div>
       </div>
     </div>
-    
-    
+
+    <!-- CARD B: Keyboard Event -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">B</span>
+          <h6 class="demo-card-title">Keyboard Event</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc"><code>$event</code> is the native <code>KeyboardEvent</code> passed to the handler.</p>
+          <div class="code-snippet">
+            &lt;<span class="hl-tag">input</span>
+            (<span class="hl-attr">keyup</span>)=<span class="hl-val">"onKeyPress($event)"</span> /&gt;
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <input type="text" class="ev-input" placeholder="Press any key..." (keyup)="onKeyPress($event)" />
+            <p class="live-result">Last key pressed: <code class="ev-code">{{ lastKeyPressed || 'none' }}</code></p>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- CARD C: Mouse Tracking -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">C</span>
+          <h6 class="demo-card-title">Mouse Events</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc">Tracks mouse position with <code>(mousemove)</code>, <code>(mouseenter)</code>, and <code>(mouseleave)</code>.</p>
+          <div class="code-snippet">
+            (<span class="hl-attr">mousemove</span>)=<span class="hl-val">"onMouseMove($event)"</span>
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <div class="mouse-tracker"
+              (mousemove)="onMouseMove($event)"
+              (mouseenter)="onMouseEnter()"
+              (mouseleave)="onMouseLeave()">
+              {{ isHovered ? '🎯 Tracking...' : 'Move mouse here!' }}
+              <br/>
+              X: <strong>{{ mousePosition.x }}</strong> | Y: <strong>{{ mousePosition.y }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD D: Color + Input -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">D</span>
+          <h6 class="demo-card-title">Color &amp; Input Events</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc"><code>(change)</code> fires on color picker change. <code>(input)</code> fires on every keystroke.</p>
+          <div class="code-snippet">
+            (<span class="hl-attr">change</span>)=<span class="hl-val">"onColorChange($event)"</span>
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <label class="ev-label">Pick a color:</label>
+              <input type="color" [value]="selectedColor" (change)="onColorChange($event)" class="ev-color" />
+              <div class="color-swatch" [style.background-color]="selectedColor">{{ selectedColor }}</div>
+            </div>
+            <input type="text" class="ev-input" placeholder="Type here (input event)" (input)="onInputChange($event)" />
+            <p class="live-result">You typed: <strong>{{ typedInput || 'nothing yet' }}</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD E: Select + Form Submit -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">E</span>
+          <h6 class="demo-card-title">Select &amp; Form Submit</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc"><code>(change)</code> on select dropdown. <code>(submit)</code> on form prevents default and handles input.</p>
+          <div class="code-snippet">
+            (<span class="hl-attr">submit</span>)=<span class="hl-val">"onFormSubmit($event)"</span>
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <select [(ngModel)]="selectedFramework" (change)="onSelectionChange(selectedFramework)" class="ev-select">
+              <option value="" disabled>Select a framework</option>
+              @for (framework of frameworks; track framework.name) {
+                <option [value]="framework.name">{{ framework.value }}</option>
+              }
+            </select>
+            <p class="live-result">Selected: <strong>{{ selectedFramework }}</strong></p>
+            <form (submit)="onFormSubmit($event)" style="display:flex; gap:8px; width:100%;">
+              <input type="text" [value]="inputValue" (input)="inputValue = $any($event).target.value" class="ev-input" placeholder="Type and submit..." style="flex:1;" />
+              <button type="submit" class="ev-btn">Submit</button>
+            </form>
+            <p class="live-result">{{ formMessage || 'Nothing submitted yet' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD F: Double Click + Right Click + Event Log -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">F</span>
+          <h6 class="demo-card-title">Double-Click, Right-Click &amp; Event Log</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc"><code>(dblclick)</code> and <code>(contextmenu)</code> events with a live event log.</p>
+          <div class="code-snippet">
+            (<span class="hl-attr">dblclick</span>)=<span class="hl-val">"onDoubleClick()"</span>
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <div class="dblclick-area" (dblclick)="onDoubleClick()">Double-click me!</div>
+              <div class="rightclick-area" (contextmenu)="onRightClick($event)">Right-click me!</div>
+            </div>
+            <div class="event-log">
+              <strong>Event Log (last 5):</strong>
+              @for (entry of eventLog; track entry) {
+                <p>{{ entry }}</p>
+              }
+              @if (eventLog.length === 0) {
+                <p class="log-empty">No events yet...</p>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -7,15 +7,16 @@ import { TwoWay } from './databinding/two-way/two-way';
 import { Attribute } from './databinding/attribute/attribute';
 import { Class } from './databinding/class/class';
 import { Style } from './databinding/style/style';
-
+import { ProductsComponent } from './products/products';
 export const routes: Routes = [
-  { path: '',              component: Home          },
-  { path: 'interpolation', component: Interpolation },
-  { path: 'property',      component: Property      },
-  { path: 'event',         component: Event         },
-  { path: 'twoway',        component: TwoWay        },
-  { path: 'attribute',     component: Attribute     },
-  { path: 'class',         component: Class         },
-  { path: 'style',         component: Style         },
-  { path: '**',            redirectTo: ''           }
+  { path: '',              component: Home              },
+  { path: 'interpolation', component: Interpolation     },
+  { path: 'property',      component: Property          },
+  { path: 'event',         component: Event             },
+  { path: 'twoway',        component: TwoWay            },
+  { path: 'attribute',     component: Attribute         },
+  { path: 'class',         component: Class             },
+  { path: 'style',         component: Style             },
+  { path: 'products',      component: ProductsComponent },
+  { path: '**',            redirectTo: ''               }
 ];

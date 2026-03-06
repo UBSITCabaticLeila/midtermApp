@@ -1,26 +1,155 @@
-.home-wrapper { padding-bottom: 3rem; }
-.hero {
-  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
-  padding: 4rem 0 3rem;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Nunito:wght@400;600;700;800&display=swap');
+
+* { font-family: 'Nunito', sans-serif; box-sizing: border-box; }
+
+/* Page */
+.home-page { min-height: 100vh; background: #f0f4ff; }
+
+/* Hero */
+.home-hero {
+  background: linear-gradient(135deg, #1c2030 0%, #2d3250 100%);
+  padding: 5rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-content { max-width: 540px; }
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(217,35,15,0.25);
+  border: 1px solid rgba(217,35,15,0.5);
+  color: #f4a09a;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.3rem 0.9rem; border-radius: 50px;
+  margin-bottom: 1rem;
+}
+
+.hero-content h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; color: #fff;
+  margin: 0 0 1rem 0; line-height: 1.2;
+}
+
+.hero-content p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.1rem; line-height: 1.7;
+  margin: 0 0 2rem 0;
+}
+
+.hero-btn {
+  display: inline-block;
+  background: #d9230f; color: white;
+  padding: 12px 28px; border-radius: 10px;
+  font-weight: 700; font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.hero-btn:hover {
+  background: #b91c0c;
+  transform: translateY(-2px);
+  color: white;
+}
+
+/* Hero Code Block */
+.hero-visual {
+  flex-shrink: 0;
+}
+
+.hero-code {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 300px;
+}
+
+.code-line {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.c-pink   { color: #ff7b72; }
+.c-blue   { color: #79c0ff; }
+.c-green  { color: #a5d6ff; }
+.c-orange { color: #ffa657; }
+.c-white  { color: #e6edf3; }
+
+/* Features Section */
+.features-section {
+  padding: 4rem;
+}
+
+.features-header {
+  text-align: center;
   margin-bottom: 2.5rem;
-  border-bottom: 1px solid var(--surface-2);
 }
-.hero-sub {
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
+
+.section-label {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #d9230f; margin-bottom: 0.5rem;
 }
-.hero-title { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.15; margin-bottom: 1rem; }
-.hero-desc { color: var(--text-muted); max-width: 540px; margin-bottom: 1.75rem; font-size: 1.05rem; }
-.features {
+
+.features-header h2 {
+  font-size: 2rem; font-weight: 800;
+  color: #1c2030; margin: 0 0 0.5rem 0;
+}
+
+.section-sub {
+  color: #64748b; font-size: 1rem; margin: 0;
+}
+
+/* Features Grid */
+.features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
-.feature-card { text-align: center; transition: var(--transition); }
-.feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(233,69,96,0.2); }
-.feature-icon { display: block; font-family: monospace; font-size: 1.4rem; color: var(--accent); margin-bottom: 0.6rem; }
-.feature-card h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
-.feature-card p  { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+
+/* Feature Card */
+.feature-card {
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: default;
+}
+
+.feature-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+  transform: translateY(-3px);
+}
+
+.feature-icon {
+  background: linear-gradient(135deg, #1c2030, #2d3250);
+  color: #f4a09a;
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem; font-weight: 700;
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.05rem; font-weight: 800;
+  color: #1c2030; margin: 0 0 0.5rem 0;
+}
+
+.feature-card p {
+  font-size: 0.875rem; color: #64748b;
+  line-height: 1.55; margin: 0;
+}

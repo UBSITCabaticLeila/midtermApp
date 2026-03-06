@@ -1,141 +1,218 @@
-<div class="container mt-4">
-    <h3>D — Two-Way Binding <code>[( )]</code></h3>
-    <p>Two-way binding allows you to synchronize data between the component and the template in both directions.
-    <p>When you use two-way binding with <code>[(ngModel)]</code>, any changes made to the input field will automatically update the corresponding property in the component, and any changes to that property in the component will automatically update the input field in the template.</p>
+<div class="container tw-page">
 
-    <div class="card text-white bg-danger mb-3">
-      <div class="card-header">Examples</div>
-      <div class="card-body">
-    <input type="text" [(ngModel)]="twoWName" class="form-control" placeholder="Enter text here..." />
-    <p>You entered: {{ twoWName }}</p>
+  <!-- HERO -->
+  <div class="tw-hero">
+    <div class="tw-hero-badge">Two-Way Binding</div>
+    <h1>Two-Way Binding <code>[( )]</code></h1>
+    <p>Synchronizes data between the component and the template in both directions using <code>[(ngModel)]</code>.</p>
+  </div>
 
-  <!-- ── Text input ─────────────────────────────────────────── -->
-  <!-- [(ngModel)] syncs twoWayName with the input field -->
-  <label>Full Name:
-    <input type="text" [(ngModel)]="twoWayName" class="form-control"   placeholder="Enter name" />
-  </label>
-  <!-- Live preview — updates as you type -->
-  <p>Name preview: <strong>{{ twoWayName }}</strong></p>
+  <!-- EXPLANATION -->
+  <div class="tw-explain">
+    <p><strong>Syntax:</strong> <code>[(ngModel)]="property"</code></p>
+    <p>When the input changes, the component property updates. When the component property changes, the input updates. It combines <code>[property]</code> and <code>(event)</code> binding in one.</p>
+  </div>
 
-  <!-- ── Email input ────────────────────────────────────────── -->
-  <label>Email:
-    <input type="email" [(ngModel)]="twoWayEmail" class="form-control" style="width:100%" placeholder="Enter email" />
-  </label>
+  <!-- DEMO CARDS -->
+  <div class="demo-section-label">Live Examples</div>
+  <div class="demo-section-title">D — Two-Way Binding Demos</div>
 
-    <!-- ── Number input (range slider) ───────────────────────── -->
-  <label>Age: {{ twoWayAge }}
-    <input type="range" min="18" max="60"  [(ngModel)]="twoWayAge" />
-  </label>
+  <div class="row g-4">
 
-    <!-- ── Radio buttons — same ngModel property, different values ── -->
-  <fieldset>
-      <legend class="mt-4">Gender:</legend>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1"  [(ngModel)]="twoWayGender" value="male">
-        <label class="form-check-label" for="optionsRadios1">Male</label>
-      </div>
-       <div class="form-check">
-          <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2"  [(ngModel)]="twoWayGender" value="female">
-           <label class="form-check-label" for="optionsRadios2">Female</label>
-       </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios3"  [(ngModel)]="twoWayGender" value="other">
-           <label class="form-check-label" for="optionsRadios3">Other</label>
+    <!-- CARD A: Text Input -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">A</span>
+          <h6 class="demo-card-title">Text Input</h6>
         </div>
+        <div class="demo-card-body">
+          <p class="demo-desc">Binds <code>[(ngModel)]</code> to a text input. Changes update the component instantly.</p>
+          <div class="code-snippet">
+            &lt;<span class="hl-tag">input</span>
+            <span class="hl-bracket">[(</span><span class="hl-attr">ngModel</span><span class="hl-bracket">)]</span>=<span class="hl-val">"twoWayName"</span> /&gt;
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <input type="text" [(ngModel)]="twoWayName" class="tw-input" placeholder="Enter name" />
+            <p class="live-result">Name preview: <strong>{{ twoWayName }}</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  </fieldset>
-  <p>Selected gender: {{ twoWayGender }}</p>
+    <!-- CARD B: Email + Age -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">B</span>
+          <h6 class="demo-card-title">Email &amp; Age Slider</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc">Binds <code>[(ngModel)]</code> to email input and a range slider for age.</p>
+          <div class="code-snippet">
+            &lt;<span class="hl-tag">input</span>
+            <span class="hl-bracket">[(</span><span class="hl-attr">ngModel</span><span class="hl-bracket">)]</span>=<span class="hl-val">"twoWayEmail"</span> /&gt;
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <input type="email" [(ngModel)]="twoWayEmail" class="tw-input" placeholder="Enter email" />
+            <p class="live-result">Email: <strong>{{ twoWayEmail || 'none' }}</strong></p>
+            <label class="tw-label">Age: <strong>{{ twoWayAge }}</strong></label>
+            <input type="range" min="18" max="60" [(ngModel)]="twoWayAge" class="tw-range" />
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <!-- ── Checkbox ───────────────────────────────────────────── -->
-  <label>
-    <input type="checkbox" [(ngModel)]="twoWaySubscribed" />
-    Subscribe to newsletter
-  </label>
-  <p>Subscribed: {{ twoWaySubscribed }}</p>
-
-
-    <input type="range" min="0" max="100" [(ngModel)]="rangeValue" class="form-range">
-    <p>Range Value: {{ rangeValue }}</p>
-
-    <select [(ngModel)]="twoWayLanguage" class="form-select">
-      <option value="" disabled>Select an option</option>
-      @for(p of programmingLanguages; track p) {
-        <option [value]="p">{{ p }}</option>
-      }
-    </select>
-    <p>Selected Language: {{ twoWayLanguage }}</p>
-
-      <!-- ── Color input ─────────────────────────────────────────── -->
-  <label>Favorite Color:
-    <input type="color" [(ngModel)]="twoWayColor" />
-  </label>
-  <div [style.background-color]="twoWayColor" [style.color]="'white'" class="color-swatch">
-    Color: {{ twoWayColor }}
-  </div>
-
-    <!-- ── Reset button — programmatic update via component ─────── -->
-  <button class="btn btn-primary" (click)="resetForm()">Reset All Fields</button>
-
-  <!-- ── Live profile summary ──────────────────────────────── -->
-  <div class="profile-summary">
-    <strong>Live Profile:</strong>
-    <p>{{ profileSummary }}</p>
-  </div>
-
-
-
-<table class="table table-dark table-striped table-hover">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">NAME</th>
-      <th scope="col">DEPARTMENT</th>
-      <th scope="col">VIEW</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (u of user; track u.id){
-    <tr [class.table-active]="selectedId === u.id">
-      <th scope="row" >{{ u.id }}</th>
-      <td>{{ u.name }}</td>
-      <td>{{ u.department }}</td>
-      <td><!-- Button trigger modal -->
-        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="onClick(u)">
-          View Details
-        </button>
-      </td>
-       </tr>
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">EMPLOYEE DETAILS</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+    <!-- CARD C: Radio + Checkbox -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">C</span>
+          <h6 class="demo-card-title">Radio &amp; Checkbox</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc">Radio buttons and checkboxes bound with <code>[(ngModel)]</code>.</p>
+          <div class="code-snippet">
+            &lt;<span class="hl-tag">input</span> type=<span class="hl-val">"radio"</span>
+            <span class="hl-bracket">[(</span><span class="hl-attr">ngModel</span><span class="hl-bracket">)]</span>=<span class="hl-val">"twoWayGender"</span> /&gt;
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <div class="radio-group">
+              <label class="radio-item"><input type="radio" [(ngModel)]="twoWayGender" value="male" /> Male</label>
+              <label class="radio-item"><input type="radio" [(ngModel)]="twoWayGender" value="female" /> Female</label>
+              <label class="radio-item"><input type="radio" [(ngModel)]="twoWayGender" value="other" /> Other</label>
             </div>
-            <div class="modal-body">
+            <p class="live-result">Gender: <strong>{{ twoWayGender }}</strong></p>
+            <label class="radio-item">
+              <input type="checkbox" [(ngModel)]="twoWaySubscribed" /> Subscribe to newsletter
+            </label>
+            <p class="live-result">Subscribed: <strong>{{ twoWaySubscribed }}</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                  <p>ID:</p><input type="text" [(ngModel)]="selectedId" class="form-control" readonly />
-                  <p>Name:</p><input type="text" [(ngModel)]="selectedName" class="form-control" readonly />
-                  <p>Department:</p><input type="text" [(ngModel)]="selectedDepartment" class="form-control" readonly />
-                  <p>Position:</p><input type="text" [(ngModel)]="selectedPosition" class="form-control" readonly />
-                  <p>Role:</p><input type="text" [(ngModel)]="selectedRole" class="form-control" readonly />
-
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+    <!-- CARD D: Select + Color -->
+    <div class="col-md-6">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">D</span>
+          <h6 class="demo-card-title">Select &amp; Color Picker</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc">Dropdown and color input bound with <code>[(ngModel)]</code>.</p>
+          <div class="code-snippet">
+            &lt;<span class="hl-tag">select</span>
+            <span class="hl-bracket">[(</span><span class="hl-attr">ngModel</span><span class="hl-bracket">)]</span>=<span class="hl-val">"twoWayLanguage"</span>&gt;
+          </div>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <select [(ngModel)]="twoWayLanguage" class="tw-select">
+              <option value="" disabled>Select language</option>
+              @for (p of programmingLanguages; track p) {
+                <option [value]="p">{{ p }}</option>
+              }
+            </select>
+            <p class="live-result">Language: <strong>{{ twoWayLanguage }}</strong></p>
+            <label class="tw-label">Favorite Color:</label>
+            <input type="color" [(ngModel)]="twoWayColor" class="tw-color" />
+            <div class="color-swatch" [style.background-color]="twoWayColor">
+              {{ twoWayColor }}
             </div>
           </div>
         </div>
       </div>
+    </div>
 
- }
+    <!-- CARD E: Profile Summary -->
+    <div class="col-12">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">E</span>
+          <h6 class="demo-card-title">Live Profile Summary &amp; Reset</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc">All bound values combined into a live profile summary. Reset button updates all fields programmatically.</p>
+          <p class="live-label">Live Output</p>
+          <div class="live-area col-dir">
+            <div class="profile-summary">
+              <strong>Live Profile:</strong>
+              <p>{{ profileSummary }}</p>
+            </div>
+            <button class="tw-btn" (click)="resetForm()">Reset All Fields</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    </tbody>
-    </table>
+    <!-- CARD F: Employee Table + Modal -->
+    <div class="col-12">
+      <div class="demo-card">
+        <div class="demo-card-header">
+          <span class="demo-letter">F</span>
+          <h6 class="demo-card-title">Employee Table with Modal</h6>
+        </div>
+        <div class="demo-card-body">
+          <p class="demo-desc">Click <strong>View Details</strong> to populate modal fields using two-way binding.</p>
+          <p class="live-label">Live Output</p>
+          <table class="tw-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (u of user; track u.id) {
+                <tr [class.active-row]="selectedId === u.id">
+                  <td>{{ u.id }}</td>
+                  <td>{{ u.name }}</td>
+                  <td>{{ u.department }}</td>
+                  <td>
+                    <button class="tw-btn-view" data-bs-toggle="modal" data-bs-target="#empModal" (click)="onClick(u)">
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
+  </div>
 
+  <!-- MODAL -->
+  <div class="modal fade" id="empModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content tw-modal">
+        <div class="modal-header tw-modal-header">
+          <h5 class="modal-title">👤 Employee Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body tw-modal-body">
+          <label class="tw-label">ID</label>
+          <input type="text" [(ngModel)]="selectedId" class="tw-input" readonly />
+          <label class="tw-label">Name</label>
+          <input type="text" [(ngModel)]="selectedName" class="tw-input" readonly />
+          <label class="tw-label">Department</label>
+          <input type="text" [(ngModel)]="selectedDepartment" class="tw-input" readonly />
+          <label class="tw-label">Position</label>
+          <input type="text" [(ngModel)]="selectedPosition" class="tw-input" readonly />
+          <label class="tw-label">Role</label>
+          <input type="text" [(ngModel)]="selectedRole" class="tw-input" readonly />
+        </div>
+        <div class="modal-footer tw-modal-footer">
+          <button type="button" class="tw-btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
   </div>
+
 </div>
