@@ -11,8 +11,4 @@ import { Navi } from './comps/navi/navi';
 })
 export class App {
   title = 'midtermApp';
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7d46a3d7fabe598c4b68b2c92617eba5662f852f

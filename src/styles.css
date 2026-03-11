@@ -12197,3 +12197,8 @@ label {
 .badge.bg-secondary, .badge.bg-light {
   color: #373a3c;
 }
+.features-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

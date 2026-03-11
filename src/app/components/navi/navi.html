@@ -1,21 +1,53 @@
-<nav class="navbar">
-    <div class="container navbar-inner">
-      <a class="brand" routerLink="/">
-        <span class="brand-icon">◈</span>
-        {{ appTitle }}
-      </a>
-      <ul class="nav-links">
-        @for (link of navLinks; track link.path) {
-          <li>
-            <a [routerLink]="link.path" routerLinkActive="active">
-              {{ link.label }}
-            </a>
-          </li>
-        }
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">MidtermApp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/components" routerLinkActive="active">Components</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/routing" routerLinkActive="active">Routing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+            Databinding
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/interpolation">Interpolation</a>
+            <a class="dropdown-item" routerLink="/property">Property</a>
+            <a class="dropdown-item" routerLink="/event">Event</a>
+            <a class="dropdown-item" routerLink="/twoway">Two-Way</a>
+            <a class="dropdown-item" routerLink="/attribute">Attribute</a>
+            <a class="dropdown-item" routerLink="/class">Class</a>
+            <a class="dropdown-item" routerLink="/style">Style</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+            Others
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/about">About</a>
+            <a class="dropdown-item" routerLink="/contact">Contact</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/settings">Settings</a>
+          </div>
+        </li>
       </ul>
-      <div class="nav-meta">
-        <span class="badge">v{{ version }}</span>
-        <span class="date-text">{{ currentDate | date:'mediumDate' }}</span>
-      </div>
+      <form class="d-flex">
+        <input class="form-control me-sm-2" type="search" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
-  </nav>
+  </div>
+</nav>

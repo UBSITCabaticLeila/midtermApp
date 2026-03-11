@@ -1,16 +1,10 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { Product } from '../models/product.interface';
-import { RouterModule } from "@angular/router";
 
-@Component({
-  selector: 'app-products',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './products.html',
-  styleUrls: ['./products.css']
+@Injectable({
+  providedIn: 'root',
 })
-export class ProductsComponent {
+export class ProductService {
 
   products: Product[] = [
     { id: 1, name: 'Wireless Headphones', category: 'Electronics', price: 2499.00, stock: 35, status: 'Available', description: 'High-quality wireless headphones with noise cancellation and 30-hour battery life.', brand: 'SoundMax', rating: 4.5, imageUrl: 'https://via.placeholder.com/150' },
@@ -25,16 +19,29 @@ export class ProductsComponent {
     { id: 10, name: 'Ceramic Coffee Mug', category: 'Kitchen & Dining', price: 250.00, stock: 100, status: 'Available', description: 'Hand-crafted ceramic coffee mug with a comfortable grip and minimalist design.', brand: 'BrewCo', rating: 4.0, imageUrl: 'https://via.placeholder.com/150' }
   ];
 
-  selectedProduct: Product | null = null;
-  showModal: boolean = false;
-
-  viewProductDetails(product: Product): void {
-    this.selectedProduct = product;
-    this.showModal = true;
+  getProducts(): Product[] {
+    return this.products;
   }
 
-  closeModal(): void {
-    this.showModal = false;
-    this.selectedProduct = null;
+  getProductById(id: number): Product | undefined {
+    return this.products.find(p => p.id === id);
   }
+
+  updateProduct(updated: Product): void {
+    const idx = this.products.findIndex(p => p.id === updated.id);
+    if (idx !== -1) this.products[idx] = { ...updated };
+  }
+
+  isAuthenticated(): boolean {
+    return !!sessionStorage.getItem('auth_token');
+  }
+
+  login(): void {
+    sessionStorage.setItem('auth_token', 'demo-token');
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('auth_token');
+  }
+
 }

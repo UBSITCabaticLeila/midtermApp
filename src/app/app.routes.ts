@@ -7,8 +7,9 @@ import { TwoWay } from './databinding/two-way/two-way';
 import { Attribute } from './databinding/attribute/attribute';
 import { Class } from './databinding/class/class';
 import { Style } from './databinding/style/style';
-<<<<<<< HEAD
 import { ProductsComponent } from './products/products';
+import { ProductDetails } from './components/product-details/product-details';
+
 export const routes: Routes = [
   { path: '',              component: Home              },
   { path: 'interpolation', component: Interpolation     },
@@ -18,19 +19,12 @@ export const routes: Routes = [
   { path: 'attribute',     component: Attribute         },
   { path: 'class',         component: Class             },
   { path: 'style',         component: Style             },
-  { path: 'products',      component: ProductsComponent },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    children: [
+      { path: ':id/details', component: ProductDetails }
+    ]
+  },
   { path: '**',            redirectTo: ''               }
-=======
-
-export const routes: Routes = [
-  { path: '',              component: Home          },
-  { path: 'interpolation', component: Interpolation },
-  { path: 'property',      component: Property      },
-  { path: 'event',         component: Event         },
-  { path: 'twoway',        component: TwoWay        },
-  { path: 'attribute',     component: Attribute     },
-  { path: 'class',         component: Class         },
-  { path: 'style',         component: Style         },
-  { path: '**',            redirectTo: ''           }
->>>>>>> 7d46a3d7fabe598c4b68b2c92617eba5662f852f
 ];
