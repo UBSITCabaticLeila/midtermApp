@@ -1,0 +1,44 @@
+<div class="container">
+    <h2>Supplier Details</h2>
+  
+    @if (supplier) {
+      <div class="form">
+        <div class="form-group">
+          <label>ID</label>
+          <input [(ngModel)]="supplier.id" name="id" readonly />
+        </div>
+        <div class="form-group">
+          <label>Supplier Name</label>
+          <input [(ngModel)]="supplier.supplierName" name="supplierName" />
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input [(ngModel)]="supplier.location" name="location" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input [(ngModel)]="supplier.email" name="email" />
+        </div>
+        <div class="form-group">
+          <label>Contact Person</label>
+          <input [(ngModel)]="supplier.contactPerson" name="contactPerson" />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input [(ngModel)]="supplier.phone" name="phone" />
+        </div>
+        <div class="form-group">
+          <label>Products Supplied</label>
+          <textarea [(ngModel)]="supplier.productsSupplied" name="productsSupplied"></textarea>
+        </div>
+  
+        <div class="buttons">
+          <button class="save-btn" (click)="saveChanges()">Save</button>
+          <button class="back-btn" (click)="goBack()">Back</button>
+        </div>
+      </div>
+    } @else {
+      <p>Supplier not found.</p>
+      <button class="back-btn" (click)="goBack()">Back</button>
+    }
+  </div>

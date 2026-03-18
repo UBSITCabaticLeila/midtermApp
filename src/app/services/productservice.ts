@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Product } from '../models/product.interface';
 
 @Injectable({
@@ -6,7 +6,7 @@ import { Product } from '../models/product.interface';
 })
 export class ProductService {
 
-  products: Product[] = [
+  private items = signal<Product[]>([
     { id: 1, name: 'Wireless Headphones', category: 'Electronics', price: 2499.00, stock: 35, status: 'Available', description: 'High-quality wireless headphones with noise cancellation and 30-hour battery life.', brand: 'SoundMax', rating: 4.5, imageUrl: 'https://via.placeholder.com/150' },
     { id: 2, name: 'Running Shoes', category: 'Footwear', price: 3200.00, stock: 0, status: 'Out of Stock', description: 'Lightweight running shoes designed for marathon performance and comfort.', brand: 'SwiftFoot', rating: 4.7, imageUrl: 'https://via.placeholder.com/150' },
     { id: 3, name: 'Mechanical Keyboard', category: 'Electronics', price: 1850.00, stock: 8, status: 'Limited', description: 'Compact TKL mechanical keyboard with RGB backlighting and tactile switches.', brand: 'TypePro', rating: 4.6, imageUrl: 'https://via.placeholder.com/150' },
@@ -17,19 +17,42 @@ export class ProductService {
     { id: 8, name: 'Bamboo Cutting Board', category: 'Kitchen & Dining', price: 380.00, stock: 60, status: 'Available', description: 'Eco-friendly bamboo cutting board with juice grooves and non-slip feet.', brand: 'GreenChef', rating: 4.1, imageUrl: 'https://via.placeholder.com/150' },
     { id: 9, name: 'Portable Bluetooth Speaker', category: 'Electronics', price: 1750.00, stock: 5, status: 'Limited', description: 'Compact waterproof Bluetooth speaker with 360° surround sound and 12-hour battery.', brand: 'BoomBox', rating: 4.5, imageUrl: 'https://via.placeholder.com/150' },
     { id: 10, name: 'Ceramic Coffee Mug', category: 'Kitchen & Dining', price: 250.00, stock: 100, status: 'Available', description: 'Hand-crafted ceramic coffee mug with a comfortable grip and minimalist design.', brand: 'BrewCo', rating: 4.0, imageUrl: 'https://via.placeholder.com/150' }
-  ];
+  ]);
 
   getProducts(): Product[] {
-    return this.products;
+    return this.items();
+  }
+
+  getById(id: number): Product | undefined {
+    return this.items().find(p => p.id === id);
   }
 
   getProductById(id: number): Product | undefined {
-    return this.products.find(p => p.id === id);
+    return this.getById(id);
+  }
+
+  search(query: string): Product[] {
+    return this.items().filter(p =>
+      p.name.toLowerCase().includes(query.toLowerCase()) ||
+      p.category.toLowerCase().includes(query.toLowerCase()) ||
+      p.id.toString().includes(query)
+    );
+  }
+
+  add(item: Product): void {
+    this.items.update(list => [...list, item]);
+  }
+
+  edit(updated: Product): void {
+    this.items.update(list => list.map(p => p.id === updated.id ? updated : p));
   }
 
   updateProduct(updated: Product): void {
-    const idx = this.products.findIndex(p => p.id === updated.id);
-    if (idx !== -1) this.products[idx] = { ...updated };
+    this.edit(updated);
+  }
+
+  delete(id: number): void {
+    this.items.update(list => list.filter(p => p.id !== id));
   }
 
   isAuthenticated(): boolean {
@@ -43,5 +66,4 @@ export class ProductService {
   logout(): void {
     sessionStorage.removeItem('auth_token');
   }
-
 }

@@ -9,6 +9,8 @@ import { Class } from './databinding/class/class';
 import { Style } from './databinding/style/style';
 import { ProductsComponent } from './products/products';
 import { ProductDetails } from './components/product-details/product-details';
+import { SuppliersListComponent } from './components/suppliers-list/suppliers-list';
+import { SupplierDetailsComponent } from './components/supplier-details/supplier-details';
 
 export const routes: Routes = [
   { path: '',              component: Home              },
@@ -26,5 +28,7 @@ export const routes: Routes = [
       { path: ':id/details', component: ProductDetails }
     ]
   },
+  { path: 'suppliers',     component: SuppliersListComponent     },
+  { path: 'suppliers/:id', component: SupplierDetailsComponent   },
   { path: '**',            redirectTo: ''               }
 ];

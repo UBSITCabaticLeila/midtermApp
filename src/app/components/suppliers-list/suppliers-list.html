@@ -1,0 +1,73 @@
+<div class="products-container">
+    <h2>Supplier List</h2>
+    <table class="products-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Supplier Name</th>
+          <th>Contact Person</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let supplier of suppliers">
+          <td>{{ supplier.id }}</td>
+          <td>{{ supplier.supplierName }}</td>
+          <td>{{ supplier.contactPerson }}</td>
+          <td>
+            <button class="btn-view" (click)="viewSupplierDetails(supplier.id)">View</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    @if (selectedSupplier) {
+    <div class="details-card">
+      <div class="details-header">
+        <h3>Supplier Details</h3>
+        <button class="btn-back" (click)="goBack()">← Back</button>
+      </div>
+      <div class="details-body">
+        <div class="detail-row">
+          <div class="detail-col">
+            <label>ID</label>
+            <input [(ngModel)]="selectedSupplier.id" name="id" readonly />
+          </div>
+          <div class="detail-col">
+            <label>Supplier Name</label>
+            <input [(ngModel)]="selectedSupplier.supplierName" name="supplierName" />
+          </div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-col">
+            <label>Location</label>
+            <input [(ngModel)]="selectedSupplier.location" name="location" />
+          </div>
+          <div class="detail-col">
+            <label>Email</label>
+            <input [(ngModel)]="selectedSupplier.email" name="email" />
+          </div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-col">
+            <label>Contact Person</label>
+            <input [(ngModel)]="selectedSupplier.contactPerson" name="contactPerson" />
+          </div>
+          <div class="detail-col">
+            <label>Phone</label>
+            <input [(ngModel)]="selectedSupplier.phone" name="phone" />
+          </div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-col">
+            <label>Products Supplied</label>
+            <input [(ngModel)]="selectedSupplier.productsSupplied" name="productsSupplied" />
+          </div>
+        </div>
+      </div>
+      <div class="details-footer">
+        <button class="btn-save" (click)="saveChanges()">Save</button>
+      </div>
+    </div>
+    }
+  </div>
